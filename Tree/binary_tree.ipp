@@ -5,10 +5,12 @@ template <typename T>
 BTree<T>::BTree() : root_(nullptr), size_() {}
 
 template <typename T>
-BTree<T>::BTree(const std::initializer_list<T>& initList) : root_(nullptr), size_() {
-	for (auto& item : initList) {
-		insert(item);
-	}
+BTree<T>::BTree(const std::initializer_list<T>& initList) :
+    root_(nullptr),
+    size_() {
+    for (auto& item : initList) {
+        insert(item);
+    }
 }
 
 template <typename T>
@@ -80,6 +82,26 @@ void BTree<T>::addNode(const T& data, Node<T>*& parent) {
 }
 
 template <typename T>
-void BTree<T>::clear() {}
+void BTree<T>::clear() {
+    if (!root_) {
+        return;
+    }
 
+    clearHelper(root_);
+    root_ = nullptr;
+}
+
+template <typename T>
+void BTree<T>::clearHelper(Node<T>*& parent) {
+    if (parent->left) {
+        clearHelper(parent->left);
+    }
+    if (parent->right) {
+        clearHelper(parent->right);
+    }
+
+    delete parent;
+
+    --size_;
+}
 } // namespace BinaryTree

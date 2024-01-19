@@ -15,6 +15,7 @@ class BTree {
 
     const Node<T>* lookUpHelper(const T& key, const Node<T>* parent) const;
     void insertHelper(const T& data, Node<T>*& parent);
+    void clearHelper(Node<T>*& parent);
 
     void addNode(const T& data, Node<T>*& parent);
 
