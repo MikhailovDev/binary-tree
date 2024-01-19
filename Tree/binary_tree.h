@@ -11,16 +11,19 @@ template <typename T>
 class BTree {
    private:
     Node<T>* root_;
-	std::size_t size_;
+    std::size_t size_;
 
-	void insertHelper(const T& data, Node<T>*& parent);
-	void addNode(const T& data, Node<T>*& parent);
+    const Node<T>* lookUpHelper(const T& key, const Node<T>* parent) const;
+    void insertHelper(const T& data, Node<T>*& parent);
+
+    void addNode(const T& data, Node<T>*& parent);
+
    public:
     BTree();
     BTree(const std::initializer_list<T>& initList);
     ~BTree();
 
-    Node<T>* lookUp(const T& key) const;
+    const Node<T>* lookUp(const T& key) const;
     void insert(const T& data);
     void remove(const T& key);
     void clear();

@@ -6,7 +6,32 @@ BTree<T>::BTree() : root_(nullptr), size_() {}
 
 template <typename T>
 BTree<T>::~BTree() {
-	this->clear();
+    this->clear();
+}
+
+template <typename T>
+const Node<T>* BTree<T>::lookUp(const T& key) const {
+    if (!root_) {
+        return nullptr;
+    }
+
+    return lookUpHelper(key, root_);
+}
+
+template <typename T>
+const Node<T>* BTree<T>::lookUpHelper(const T& key,
+                                      const Node<T>* parent) const {
+    if (!parent) {
+        return nullptr;
+    }
+
+    if (key == parent->data) {
+        return parent;
+    } else if (key < parent->data) {
+        return lookUpHelper(key, parent->left);
+    } else {
+        return lookUpHelper(key, parent->right);
+    }
 }
 
 template <typename T>
@@ -28,14 +53,14 @@ void BTree<T>::insertHelper(const T& data, Node<T>*& parent) {
         }
 
         insertHelper(data, parent->left);
-		return;
+        return;
     } else {
         if (!parent->right) {
             addNode(data, parent->right);
             return;
         }
 
-		insertHelper(data, parent->right);
+        insertHelper(data, parent->right);
     }
 }
 
@@ -49,4 +74,5 @@ void BTree<T>::addNode(const T& data, Node<T>*& parent) {
 
 template <typename T>
 void BTree<T>::clear() {}
+
 } // namespace BinaryTree
