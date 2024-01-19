@@ -5,6 +5,13 @@ template <typename T>
 BTree<T>::BTree() : root_(nullptr), size_() {}
 
 template <typename T>
+BTree<T>::BTree(const std::initializer_list<T>& initList) : root_(nullptr), size_() {
+	for (auto& item : initList) {
+		insert(item);
+	}
+}
+
+template <typename T>
 BTree<T>::~BTree() {
     this->clear();
 }
