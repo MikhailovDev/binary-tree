@@ -4,8 +4,7 @@
 #include <cstddef>
 #include <initializer_list>
 
-template <typename T>
-struct Node;
+#include "node.h"
 
 namespace BinaryTree {
 template <typename T>
@@ -14,13 +13,15 @@ class BTree {
     Node<T>* root_;
 	std::size_t size_;
 
+	void insertHelper(const T& data, Node<T>*& parent);
+	void addNode(const T& data, Node<T>*& parent);
    public:
     BTree();
     BTree(const std::initializer_list<T>& initList);
     ~BTree();
 
     Node<T>* lookUp(const T& key) const;
-    void insert(T data);
+    void insert(const T& data);
     void remove(const T& key);
     void clear();
 
