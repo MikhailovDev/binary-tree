@@ -104,4 +104,9 @@ void BTree<T>::clearHelper(Node<T>*& parent) {
 
     --size_;
 }
+
+template <typename T>
+inline std::size_t BTree<T>::getSize() const {
+    return size_;
+}
 } // namespace BinaryTree
