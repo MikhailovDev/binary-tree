@@ -10,6 +10,8 @@ struct Node {
     T data;
     Node<T>* left;
     Node<T>* right;
+
+	const Node<T>& operator> (const Node<T>& other) const;
 };
 } // namespace BinaryTree
 
