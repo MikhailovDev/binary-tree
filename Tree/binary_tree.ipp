@@ -139,4 +139,19 @@ void BTree<T>::printPostorderHelper(const Node<T>* parent) const {
         std::cout << parent->data << " ";
     }
 }
+
+template <typename T>
+void BTree<T>::printPreorder() const {
+	printPreorderHelper(root_);
+	std::cout << std::endl;
+}
+
+template <typename T>
+void BTree<T>::printPreorderHelper(const Node<T>* parent) const {
+    if (parent) {
+        std::cout << parent->data << " ";
+        printPreorderHelper(parent->left);
+        printPreorderHelper(parent->right);
+    }
+}
 } // namespace BinaryTree
