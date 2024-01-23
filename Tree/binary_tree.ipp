@@ -28,18 +28,17 @@ const Node<T>* BTree<T>::lookUp(const T& key) const {
 }
 
 template <typename T>
-const Node<T>* BTree<T>::lookUpHelper(const T& key,
-                                      const Node<T>* parent) const {
-    if (!parent) {
+const Node<T>* BTree<T>::lookUpHelper(const T& key, const Node<T>* root) const {
+    if (!root) {
         return nullptr;
     }
 
-    if (key == parent->data) {
-        return parent;
-    } else if (key < parent->data) {
-        return lookUpHelper(key, parent->left);
+    if (key == root->data) {
+        return root;
+    } else if (key < root->data) {
+        return lookUpHelper(key, root->left);
     } else {
-        return lookUpHelper(key, parent->right);
+        return lookUpHelper(key, root->right);
     }
 }
 
@@ -54,29 +53,29 @@ void BTree<T>::insert(const T& data) {
 }
 
 template <typename T>
-void BTree<T>::insertHelper(const T& data, Node<T>*& parent) {
-    if (data <= parent->data) {
-        if (!parent->left) {
-            addNode(data, parent->left);
+void BTree<T>::insertHelper(const T& data, Node<T>*& root) {
+    if (data <= root->data) {
+        if (!root->left) {
+            addNode(data, root->left);
             return;
         }
 
-        insertHelper(data, parent->left);
+        insertHelper(data, root->left);
         return;
     } else {
-        if (!parent->right) {
-            addNode(data, parent->right);
+        if (!root->right) {
+            addNode(data, root->right);
             return;
         }
 
-        insertHelper(data, parent->right);
+        insertHelper(data, root->right);
     }
 }
 
 template <typename T>
-void BTree<T>::addNode(const T& data, Node<T>*& parent) {
+void BTree<T>::addNode(const T& data, Node<T>*& root) {
     auto tmp = new Node<T>(data);
-    parent = tmp;
+    root = tmp;
 
     ++size_;
 }
@@ -92,15 +91,15 @@ void BTree<T>::clear() {
 }
 
 template <typename T>
-void BTree<T>::clearHelper(Node<T>*& parent) {
-    if (parent->left) {
-        clearHelper(parent->left);
+void BTree<T>::clearHelper(Node<T>*& root) {
+    if (root->left) {
+        clearHelper(root->left);
     }
-    if (parent->right) {
-        clearHelper(parent->right);
+    if (root->right) {
+        clearHelper(root->right);
     }
 
-    delete parent;
+    delete root;
 
     --size_;
 }
@@ -113,45 +112,45 @@ inline std::size_t BTree<T>::getSize() const {
 template <typename T>
 void BTree<T>::printInorder() const {
     printInorderHelper(root_);
-	std::cout << std::endl;
+    std::cout << std::endl;
 }
 
 template <typename T>
-void BTree<T>::printInorderHelper(const Node<T>* parent) const {
-    if (parent) {
-        printInorderHelper(parent->left);
-        std::cout << parent->data << " ";
-        printInorderHelper(parent->right);
+void BTree<T>::printInorderHelper(const Node<T>* root) const {
+    if (root) {
+        printInorderHelper(root->left);
+        std::cout << root->data << " ";
+        printInorderHelper(root->right);
     }
 }
 
 template <typename T>
 void BTree<T>::printPostorder() const {
     printPostorderHelper(root_);
-	std::cout << std::endl;
+    std::cout << std::endl;
 }
 
 template <typename T>
-void BTree<T>::printPostorderHelper(const Node<T>* parent) const {
-    if (parent) {
-        printPostorderHelper(parent->left);
-        printPostorderHelper(parent->right);
-        std::cout << parent->data << " ";
+void BTree<T>::printPostorderHelper(const Node<T>* root) const {
+    if (root) {
+        printPostorderHelper(root->left);
+        printPostorderHelper(root->right);
+        std::cout << root->data << " ";
     }
 }
 
 template <typename T>
 void BTree<T>::printPreorder() const {
-	printPreorderHelper(root_);
-	std::cout << std::endl;
+    printPreorderHelper(root_);
+    std::cout << std::endl;
 }
 
 template <typename T>
-void BTree<T>::printPreorderHelper(const Node<T>* parent) const {
-    if (parent) {
-        std::cout << parent->data << " ";
-        printPreorderHelper(parent->left);
-        printPreorderHelper(parent->right);
+void BTree<T>::printPreorderHelper(const Node<T>* root) const {
+    if (root) {
+        std::cout << root->data << " ";
+        printPreorderHelper(root->left);
+        printPreorderHelper(root->right);
     }
 }
 } // namespace BinaryTree

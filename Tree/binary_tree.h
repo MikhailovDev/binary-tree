@@ -13,15 +13,15 @@ class BTree {
     Node<T>* root_;
     std::size_t size_;
 
-    const Node<T>* lookUpHelper(const T& key, const Node<T>* parent) const;
-    void insertHelper(const T& data, Node<T>*& parent);
-    void clearHelper(Node<T>*& parent);
+    const Node<T>* lookUpHelper(const T& key, const Node<T>* root) const;
+    void insertHelper(const T& data, Node<T>*& root);
+    void clearHelper(Node<T>*& root);
 
-	void printInorderHelper(const Node<T>* parent) const;
-	void printPreorderHelper(const Node<T>* parent) const;
-	void printPostorderHelper(const Node<T>* parent) const;
+    void printInorderHelper(const Node<T>* root) const;
+    void printPreorderHelper(const Node<T>* root) const;
+    void printPostorderHelper(const Node<T>* root) const;
 
-    void addNode(const T& data, Node<T>*& parent);
+    void addNode(const T& data, Node<T>*& root);
 
    public:
     BTree();
