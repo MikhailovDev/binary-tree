@@ -153,4 +153,52 @@ void BTree<T>::printPreorderHelper(const Node<T>* root) const {
         printPreorderHelper(root->right);
     }
 }
+
+template <typename T>
+void BTree<T>::remove(const T& key) {
+    root_ = removeHelper(root_, key);
+}
+
+template <typename T>
+Node<T>* BTree<T>::removeHelper(Node<T>* root, const T& key) {
+    if (!root_) {
+        return nullptr;
+    }
+
+    if (key < root->data) {
+        root->left = removeHelper(root->left, key);
+        return root;
+    } else if (key > root->data) {
+        root->right = removeHelper(root->right, key);
+        return root;
+    }
+
+    if (!root->left) {
+        Node<T>* tmp = root->right;
+        delete root;
+        --size_;
+        return tmp;
+    } else if (!root->right) {
+        Node<T>* tmp = root->left;
+        delete root;
+        --size_;
+        return tmp;
+    } else {
+        Node<T>* succesorParent = root;
+        Node<T>* succesor = root->right;
+        while (succesor->left) {
+            succesorParent = succesor;
+            succesor = succesor->left;
+        }
+
+        succesor->left = root->left;
+        succesor->right =
+            succesorParent != root ? root->right : succesor->right;
+        succesorParent->left = nullptr;
+
+        delete root;
+        --size_;
+        return succesor;
+    }
+}
 } // namespace BinaryTree

@@ -23,6 +23,8 @@ class BTree {
 
     void addNode(const T& data, Node<T>*& root);
 
+    Node<T>* removeHelper(Node<T>* root, const T& key);
+
    public:
     BTree();
     BTree(const std::initializer_list<T>& initList);
