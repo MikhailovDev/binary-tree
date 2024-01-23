@@ -109,4 +109,18 @@ template <typename T>
 inline std::size_t BTree<T>::getSize() const {
     return size_;
 }
+
+template <typename T>
+void BTree<T>::printInorder() const {
+	printInorderHelper(root_);
+}
+
+template <typename T>
+void BTree<T>::printInorderHelper(const Node<T>* parent) const {
+	if (parent) {
+		printInorderHelper(parent->left);
+		std::cout << parent->data << " ";
+		printInorderHelper(parent->right);
+	}
+}
 } // namespace BinaryTree
