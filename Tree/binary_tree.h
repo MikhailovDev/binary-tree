@@ -18,6 +18,7 @@ class BTree {
     void clearHelper(Node<T>*& parent);
 
 	void printInorderHelper(const Node<T>* parent) const;
+	void printPostorderHelper(const Node<T>* parent) const;
 
     void addNode(const T& data, Node<T>*& parent);
 
