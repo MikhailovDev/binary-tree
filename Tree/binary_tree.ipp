@@ -209,22 +209,40 @@ inline int BTree<T>::getDepth(const T& data) const {
 }
 
 template <typename T>
-int BTree<T>::depthHelper(const Node<T>* root, const T& data, std::size_t depth) const {
-	if (!root) {
-		return -1;
-	}
+int BTree<T>::depthHelper(const Node<T>* root, const T& data, int depth) const {
+    if (!root) {
+        return -1;
+    }
 
-	if (root->data > data) {
-    	return depthHelper(root->left, data, depth + 1);
-	} else if (root->data < data) {
-    	return depthHelper(root->right, data, depth + 1);
-	}
+    if (root->data > data) {
+        return depthHelper(root->left, data, depth + 1);
+    } else if (root->data < data) {
+        return depthHelper(root->right, data, depth + 1);
+    }
 
-	return depth;
+    return depth;
 }
 
 template <typename T>
-void BTree<T>::printHelper(std::ostream& os, const Node<T>* root, std::size_t number) const {
+inline std::size_t BTree<T>::getMaxDepth() const {
+    int max {};
+    return maxDepthHelper(root_, max);
+}
+
+template <typename T>
+std::size_t BTree<T>::maxDepthHelper(const Node<T>* root, int& maxDepth,
+                           int depth) const {
+    if (!root) {
+        return (maxDepth = maxDepth < depth ? depth : maxDepth);
+    }
+
+    maxDepthHelper(root->left, maxDepth, depth + 1);
+    maxDepthHelper(root->right, maxDepth, depth + 1);
+}
+
+template <typename T>
+void BTree<T>::printHelper(std::ostream& os, const Node<T>* root,
+                           std::size_t number) const {
     if (!root) {
         return;
     }
