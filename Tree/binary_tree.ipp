@@ -283,6 +283,22 @@ T* BTree<T>::maxHelper(Node<T>* root) const {
 }
 
 template <typename T>
+inline T* BTree<T>::getMin() const {
+    return minHelper(root_);
+}
+
+template <typename T>
+T* BTree<T>::minHelper(Node<T>* root) const {
+    if (!root_) {
+        return nullptr;
+    } else if (!root->left) {
+        return &root->data;
+    }
+
+    return minHelper(root->left);
+}
+
+template <typename T>
 void BTree<T>::printHelper(std::ostream& os, const Node<T>* root,
                            std::size_t number) const {
     if (!root) {
