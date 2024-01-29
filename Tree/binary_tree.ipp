@@ -258,13 +258,28 @@ std::size_t BTree<T>::minDepthHelper(const Node<T>* root, int& minDepth,
 }
 
 template <typename T>
-std::size_t BTree<T>::getFirstDepth(const Node<T>* root,
-                                           int depth) const {
-	if (!root) {
-		return depth;
-	}
+std::size_t BTree<T>::getFirstDepth(const Node<T>* root, int depth) const {
+    if (!root) {
+        return depth;
+    }
 
     return getFirstDepth(root->left, depth + 1);
+}
+
+template <typename T>
+inline T* BTree<T>::getMax() const {
+    return maxHelper(root_);
+}
+
+template <typename T>
+T* BTree<T>::maxHelper(Node<T>* root) const {
+    if (!root_) {
+        return nullptr;
+    } else if (!root->right) {
+        return &root->data;
+    }
+
+    return maxHelper(root->right);
 }
 
 template <typename T>

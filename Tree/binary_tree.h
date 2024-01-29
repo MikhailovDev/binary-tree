@@ -32,6 +32,8 @@ class BTree {
     std::size_t minDepthHelper(const Node<T>* root, int& minDepth, int depth = 0) const;
     std::size_t getFirstDepth(const Node<T>* root, int depth = 0) const;
 
+    T* maxHelper(Node<T>* root) const;
+
    public:
     BTree();
     BTree(const std::initializer_list<T>& initList);
@@ -48,8 +50,8 @@ class BTree {
     std::size_t getMaxDepth() const;
     std::size_t getMinDepth() const;
 
-    T getMax() const;
-    T getMin() const;
+    T* getMax() const;
+    T* getMin();
 
     bool isBalanced();
 
