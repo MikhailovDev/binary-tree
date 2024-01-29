@@ -204,6 +204,26 @@ Node<T>* BTree<T>::removeHelper(Node<T>* root, const T& data) {
 }
 
 template <typename T>
+inline int BTree<T>::getDepth(const T& data) const {
+    return depthHelper(root_, data);
+}
+
+template <typename T>
+int BTree<T>::depthHelper(const Node<T>* root, const T& data, std::size_t depth) const {
+	if (!root) {
+		return -1;
+	}
+
+	if (root->data > data) {
+    	return depthHelper(root->left, data, depth + 1);
+	} else if (root->data < data) {
+    	return depthHelper(root->right, data, depth + 1);
+	}
+
+	return depth;
+}
+
+template <typename T>
 void BTree<T>::printHelper(std::ostream& os, const Node<T>* root, std::size_t number) const {
     if (!root) {
         return;
