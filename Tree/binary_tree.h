@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <initializer_list>
+#include <iostream>
 
 #include "node.h"
 
@@ -49,6 +50,11 @@ class BTree {
     void printInorder() const;
     void printPreorder() const;
     void printPostorder() const;
+
+    friend std::ostream& operator<<(std::ostream& os, const BTree<T>& tree) {
+        tree.printHelper(os, tree.root_);
+		return os;
+    }
 };
 } // namespace BinaryTree
 

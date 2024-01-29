@@ -201,4 +201,18 @@ Node<T>* BTree<T>::removeHelper(Node<T>* root, const T& key) {
         return succesor;
     }
 }
+
+template <typename T>
+void BTree<T>::printHelper(std::ostream& os, const Node<T>* root, std::size_t number) const {
+    if (!root) {
+        return;
+    }
+
+    printHelper(os, root->left, number + 1);
+    for (std::size_t i {}; i < number; ++i) {
+        os << "  ";
+    }
+    os << root->data << std::endl;
+    printHelper(os, root->right, number + 1);
+}
 } // namespace BinaryTree
