@@ -14,31 +14,35 @@ class BTree {
     Node<T>* root_;
     std::size_t size_;
 
-    const Node<T>* lookUpHelper(const T& key, const Node<T>* root) const;
+    const Node<T>* lookUpHelper(const T& data, const Node<T>* root) const;
     void insertHelper(const T& data, Node<T>*& root);
     void clearHelper(Node<T>*& root);
 
     void printInorderHelper(const Node<T>* root) const;
     void printPreorderHelper(const Node<T>* root) const;
     void printPostorderHelper(const Node<T>* root) const;
+    void printHelper(std::ostream& os, const Node<T>* root, std::size_t number = 0) const;
 
     void addNode(const T& data, Node<T>*& root);
 
-    Node<T>* removeHelper(Node<T>* root, const T& key);
+    Node<T>* removeHelper(Node<T>* root, const T& data);
+
+    int depthHelper(const Node<T>* root, const T& data, std::size_t depth = 0) const;
+    int depthHelper(const Node<T>* root, std::size_t depth = 0) const;
 
    public:
     BTree();
     BTree(const std::initializer_list<T>& initList);
     ~BTree();
 
-    const Node<T>* lookUp(const T& key) const;
+    const Node<T>* lookUp(const T& data) const;
     void insert(const T& data);
-    void remove(const T& key);
+    void remove(const T& data);
     void clear();
 
     std::size_t getSize() const;
-    std::size_t getHeight() const;
 
+    int getDepth(const T& data) const;
     std::size_t getMaxDepth() const;
     std::size_t getMinDepth() const;
 

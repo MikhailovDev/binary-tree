@@ -19,26 +19,27 @@ BTree<T>::~BTree() {
 }
 
 template <typename T>
-const Node<T>* BTree<T>::lookUp(const T& key) const {
+const Node<T>* BTree<T>::lookUp(const T& data) const {
     if (!root_) {
         return nullptr;
     }
 
-    return lookUpHelper(key, root_);
+    return lookUpHelper(data, root_);
 }
 
 template <typename T>
-const Node<T>* BTree<T>::lookUpHelper(const T& key, const Node<T>* root) const {
+const Node<T>* BTree<T>::lookUpHelper(const T& data,
+                                      const Node<T>* root) const {
     if (!root) {
         return nullptr;
     }
 
-    if (key == root->data) {
+    if (data == root->data) {
         return root;
-    } else if (key < root->data) {
-        return lookUpHelper(key, root->left);
+    } else if (data < root->data) {
+        return lookUpHelper(data, root->left);
     } else {
-        return lookUpHelper(key, root->right);
+        return lookUpHelper(data, root->right);
     }
 }
 
@@ -155,21 +156,21 @@ void BTree<T>::printPreorderHelper(const Node<T>* root) const {
 }
 
 template <typename T>
-void BTree<T>::remove(const T& key) {
-    root_ = removeHelper(root_, key);
+void BTree<T>::remove(const T& data) {
+    root_ = removeHelper(root_, data);
 }
 
 template <typename T>
-Node<T>* BTree<T>::removeHelper(Node<T>* root, const T& key) {
+Node<T>* BTree<T>::removeHelper(Node<T>* root, const T& data) {
     if (!root_) {
         return nullptr;
     }
 
-    if (key < root->data) {
-        root->left = removeHelper(root->left, key);
+    if (data < root->data) {
+        root->left = removeHelper(root->left, data);
         return root;
-    } else if (key > root->data) {
-        root->right = removeHelper(root->right, key);
+    } else if (data > root->data) {
+        root->right = removeHelper(root->right, data);
         return root;
     }
 
