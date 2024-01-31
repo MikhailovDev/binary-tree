@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "binary_tree.h"
 
 namespace BinaryTree {
@@ -312,6 +314,28 @@ T* BTree<T>::minHelper(Node<T>* root) const {
     }
 
     return minHelper(root->left);
+}
+
+template <typename T>
+inline bool BTree<T>::isBalanced() const {
+    return isBalancedHelper(root_);
+}
+
+template <typename T>
+bool BTree<T>::isBalancedHelper(const Node<T>* root) const {
+    if (!root) {
+        return true;
+    }
+
+    if (std::abs(getHeight(root->left) - getHeight(root->right)) > 1) {
+        return false;
+    }
+
+    if (isBalancedHelper(root->left)) {
+        return isBalancedHelper(root->right);
+    }
+
+	return false;
 }
 
 template <typename T>

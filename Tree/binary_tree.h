@@ -37,6 +37,8 @@ class BTree {
     T* maxHelper(Node<T>* root) const;
     T* minHelper(Node<T>* root) const;
 
+	bool isBalancedHelper(const Node<T>* root) const;
+
    public:
     BTree();
     BTree(const std::initializer_list<T>& initList);
@@ -57,7 +59,7 @@ class BTree {
     T* getMax() const;
     T* getMin() const;
 
-    bool isBalanced();
+    bool isBalanced() const;
 
     void printInorder() const;
     void printPreorder() const;
