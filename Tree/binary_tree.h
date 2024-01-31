@@ -17,7 +17,7 @@ class BTree {
     const Node<T>* getNode(const Node<T>* root, const T& data) const;
     const T* lookUpHelper(const Node<T>* root, const T& data) const;
 
-    void insertHelper(const T& data, Node<T>*& root);
+    void insertHelper(const T& data, Node<T>* root);
     void clearHelper(Node<T>*& root);
 
     void printInorderHelper(const Node<T>* root) const;
