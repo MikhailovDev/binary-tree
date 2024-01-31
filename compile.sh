@@ -1,6 +1,7 @@
 #!/bin/bash
 
-read -p "====== Write file name: " filename
+#read -p "====== Write file name: " filename
+filename="main"
 
 if find . -wholename "$filename.cpp"/dev/null
 then
