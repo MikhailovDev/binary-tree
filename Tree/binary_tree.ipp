@@ -166,17 +166,23 @@ void BTree<T>::printInorderHelper(const Node<T>* root) const {
 
 template <typename T>
 void BTree<T>::printPostorder() const {
+    if (!root_) {
+        return;
+    }
+
     printPostorderHelper(root_);
     std::cout << std::endl;
 }
 
 template <typename T>
 void BTree<T>::printPostorderHelper(const Node<T>* root) const {
-    if (root) {
-        printPostorderHelper(root->left);
-        printPostorderHelper(root->right);
-        std::cout << root->data << " ";
+    if (!root) {
+        return;
     }
+
+    printPostorderHelper(root->left);
+    printPostorderHelper(root->right);
+    std::cout << root->data << " ";
 }
 
 template <typename T>
