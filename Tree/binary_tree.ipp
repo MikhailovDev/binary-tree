@@ -111,6 +111,16 @@ inline std::size_t BTree<T>::getSize() const {
 }
 
 template <typename T>
+int BTree<T>::getHeight(const T& data) const {
+	auto search = lookUp(data);
+	if (search) {
+		int max {};
+    	return maxDepthHelper(search, max);
+	}
+	return -1;
+}
+
+template <typename T>
 void BTree<T>::printInorder() const {
     printInorderHelper(root_);
     std::cout << std::endl;
