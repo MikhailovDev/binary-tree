@@ -36,6 +36,26 @@ const Node<T>* BTree<T>::getNode(const Node<T>* root, const T& data) const {
 }
 
 template <typename T>
+inline const T* BTree<T>::lookUp(const T& data) const {
+    return lookUpHelper(root_, data);
+}
+
+template <typename T>
+const T* BTree<T>::lookUpHelper(const Node<T>* root, const T& data) const {
+    if (!root) {
+        return nullptr;
+    }
+
+    if (data == root->data) {
+        return &root->data;
+    } else if (data < root->data) {
+        return lookUpHelper(root->left, data);
+    } else {
+        return lookUpHelper(root->right, data);
+    }
+}
+
+template <typename T>
 void BTree<T>::insert(const T& data) {
     if (!root_) {
         addNode(data, root_);
