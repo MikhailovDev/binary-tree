@@ -145,17 +145,23 @@ inline int BTree<T>::getHeight() const {
 
 template <typename T>
 void BTree<T>::printInorder() const {
+    if (!root_) {
+        return;
+    }
+
     printInorderHelper(root_);
     std::cout << std::endl;
 }
 
 template <typename T>
 void BTree<T>::printInorderHelper(const Node<T>* root) const {
-    if (root) {
-        printInorderHelper(root->left);
-        std::cout << root->data << " ";
-        printInorderHelper(root->right);
+    if (!root) {
+        return;
     }
+
+    printInorderHelper(root->left);
+    std::cout << root->data << " ";
+    printInorderHelper(root->right);
 }
 
 template <typename T>
@@ -262,7 +268,7 @@ inline int BTree<T>::getMaxDepth() const {
 
 template <typename T>
 int BTree<T>::maxDepthHelper(const Node<T>* root, int& maxDepth,
-                                     int depth) const {
+                             int depth) const {
     if (!root) {
         return (maxDepth = maxDepth < depth ? depth : maxDepth);
     }
@@ -279,18 +285,18 @@ inline int BTree<T>::getMinDepth() const {
 
 template <typename T>
 int BTree<T>::minDepthHelper(const Node<T>* root, int& minDepth,
-                                     int depth) const {
+                             int depth) const {
     if (!root) {
         return minDepth;
     }
 
     minDepthHelper(root->left, minDepth, depth + 1);
     minDepthHelper(root->right, minDepth, depth + 1);
-	if (isLeaf(root)) {
-		return (minDepth = minDepth > depth + 1 ? depth + 1 : minDepth);
-	} else {
-		return minDepth;
-	}
+    if (isLeaf(root)) {
+        return (minDepth = minDepth > depth + 1 ? depth + 1 : minDepth);
+    } else {
+        return minDepth;
+    }
 }
 
 template <typename T>
@@ -304,9 +310,9 @@ int BTree<T>::getFirstDepth(const Node<T>* root, int depth) const {
 
 template <typename T>
 inline T* BTree<T>::getMax() const {
-	if (!root_) {
-		return nullptr;
-	}
+    if (!root_) {
+        return nullptr;
+    }
 
     return maxHelper(root_);
 }
