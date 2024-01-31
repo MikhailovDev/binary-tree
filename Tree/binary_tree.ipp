@@ -111,13 +111,19 @@ inline std::size_t BTree<T>::getSize() const {
 }
 
 template <typename T>
+int BTree<T>::getHeight(const Node<T>* dNode) const {
+    if (!dNode) {
+        return -1;
+    }
+
+    int max {};
+    return maxDepthHelper(dNode, max);
+}
+
+template <typename T>
 int BTree<T>::getHeight(const T& data) const {
-	auto search = lookUp(data);
-	if (search) {
-		int max {};
-    	return maxDepthHelper(search, max);
-	}
-	return -1;
+    auto search = lookUp(data);
+    return getHeight(search);
 }
 
 template <typename T>
