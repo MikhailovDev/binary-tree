@@ -21,17 +21,7 @@ BTree<T>::~BTree() {
 }
 
 template <typename T>
-const Node<T>* BTree<T>::lookUp(const T& data) const {
-    if (!root_) {
-        return nullptr;
-    }
-
-    return lookUpHelper(data, root_);
-}
-
-template <typename T>
-const Node<T>* BTree<T>::lookUpHelper(const T& data,
-                                      const Node<T>* root) const {
+const Node<T>* BTree<T>::getNode(const Node<T>* root, const T& data) const {
     if (!root) {
         return nullptr;
     }
@@ -39,9 +29,9 @@ const Node<T>* BTree<T>::lookUpHelper(const T& data,
     if (data == root->data) {
         return root;
     } else if (data < root->data) {
-        return lookUpHelper(data, root->left);
+        return getNode(root->left, data);
     } else {
-        return lookUpHelper(data, root->right);
+        return getNode(root->right, data);
     }
 }
 
@@ -124,7 +114,7 @@ int BTree<T>::getHeight(const Node<T>* dNode) const {
 
 template <typename T>
 int BTree<T>::getHeight(const T& data) const {
-    auto search = lookUp(data);
+    auto search = getNode(root_, data);
     return getHeight(search);
 }
 

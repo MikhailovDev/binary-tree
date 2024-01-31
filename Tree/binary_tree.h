@@ -14,7 +14,8 @@ class BTree {
     Node<T>* root_;
     std::size_t size_;
 
-    const Node<T>* lookUpHelper(const T& data, const Node<T>* root) const;
+    const Node<T>* getNode(const Node<T>* root, const T& data) const;
+
     void insertHelper(const T& data, Node<T>*& root);
     void clearHelper(Node<T>*& root);
 
@@ -44,7 +45,6 @@ class BTree {
     BTree(const std::initializer_list<T>& initList);
     ~BTree();
 
-    const Node<T>* lookUp(const T& data) const;
     void insert(const T& data);
     void remove(const T& data);
     void clear();
