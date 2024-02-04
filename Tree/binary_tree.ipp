@@ -195,40 +195,38 @@ Node<T>* BTree<T>::removeHelper(Node<T>* root, const T& data) {
     }
 
     if (data < root->data) {
-        root->left = removeHelper(root->left, data);
+        if (root->left) {
+            root->left = removeHelper(root->left, data);
+        }
         return root;
     } else if (data > root->data) {
-        root->right = removeHelper(root->right, data);
+        if (root->right) {
+            root->right = removeHelper(root->right, data);
+        }
         return root;
     }
 
-    if (!root->left) {
-        Node<T>* tmp = root->right;
+    if (!(root->left && root->right)) {
+        Node<T>* tmp = root->right ? root->right : root->left;
         delete root;
         --size_;
         return tmp;
-    } else if (!root->right) {
-        Node<T>* tmp = root->left;
-        delete root;
-        --size_;
-        return tmp;
-    } else {
-        Node<T>* succesorParent = root;
-        Node<T>* succesor = root->right;
-        while (succesor->left) {
-            succesorParent = succesor;
-            succesor = succesor->left;
-        }
-
-        succesor->left = root->left;
-        succesor->right =
-            succesorParent != root ? root->right : succesor->right;
-        succesorParent->left = nullptr;
-
-        delete root;
-        --size_;
-        return succesor;
     }
+
+    Node<T>* succesorParent = root;
+    Node<T>* succesor = root->right;
+    while (succesor->left) {
+        succesorParent = succesor;
+        succesor = succesor->left;
+    }
+
+    succesor->left = root->left;
+    succesor->right = succesorParent != root ? root->right : succesor->right;
+    succesorParent->left = nullptr;
+
+    delete root;
+    --size_;
+    return succesor;
 }
 
 template <typename T>
@@ -345,7 +343,7 @@ bool BTree<T>::isBalancedHelper(const Node<T>* root) const {
         return isBalancedHelper(root->right);
     }
 
-	return false;
+    return false;
 }
 
 template <typename T>
