@@ -20,5 +20,5 @@ TEST_F(BTreeTest, GetHeightNormalTree) {
 	balancedTree.insert(5);
 	balancedTree.insert(5);
 	balancedTree.insert(5);
-	EXPECT_EQ(balancedTree.getHeight(1), 5);
+	EXPECT_EQ(balancedTree.getHeight(), 5);
 }

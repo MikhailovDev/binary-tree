@@ -139,6 +139,11 @@ int BTree<T>::getHeight(const T& data) const {
 }
 
 template <typename T>
+inline int BTree<T>::getHeight() const {
+    return getHeight(root_->data);
+}
+
+template <typename T>
 void BTree<T>::printInorder() const {
     printInorderHelper(root_);
     std::cout << std::endl;

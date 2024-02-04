@@ -53,6 +53,7 @@ class BTree {
 
     std::size_t getSize() const;
 	int getHeight(const T& data) const;
+	int getHeight() const;
 
     int getDepth(const T& data) const;
     std::size_t getMaxDepth() const;
