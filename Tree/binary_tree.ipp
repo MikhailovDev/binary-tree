@@ -304,18 +304,16 @@ int BTree<T>::getFirstDepth(const Node<T>* root, int depth) const {
 
 template <typename T>
 inline T* BTree<T>::getMax() const {
+	if (!root_) {
+		return nullptr;
+	}
+
     return maxHelper(root_);
 }
 
 template <typename T>
 T* BTree<T>::maxHelper(Node<T>* root) const {
-    if (!root_) {
-        return nullptr;
-    } else if (!root->right) {
-        return &root->data;
-    }
-
-    return maxHelper(root->right);
+    return root->right ? maxHelper(root->right) : &root->data;
 }
 
 template <typename T>
