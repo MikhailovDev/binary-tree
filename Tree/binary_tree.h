@@ -32,7 +32,7 @@ class BTree {
     int getHeight(const Node<T>* data) const;
 
     int depthHelper(const Node<T>* root, const T& data, int depth = 0) const;
-    std::size_t maxDepthHelper(const Node<T>* root, int& maxDepth, int depth = -1) const;
+    int maxDepthHelper(const Node<T>* root, int& maxDepth, int depth = -1) const;
     int minDepthHelper(const Node<T>* root, int& minDepth, int depth = -1) const;
     int getFirstDepth(const Node<T>* root, int depth = -1) const;
 
@@ -57,7 +57,7 @@ class BTree {
 	int getHeight() const;
 
     int getDepth(const T& data) const;
-    std::size_t getMaxDepth() const;
+    int getMaxDepth() const;
     int getMinDepth() const;
 
     T* getMax() const;
