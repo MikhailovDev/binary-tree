@@ -318,18 +318,16 @@ T* BTree<T>::maxHelper(Node<T>* root) const {
 
 template <typename T>
 inline T* BTree<T>::getMin() const {
+    if (!root_) {
+        return nullptr;
+    }
+
     return minHelper(root_);
 }
 
 template <typename T>
 T* BTree<T>::minHelper(Node<T>* root) const {
-    if (!root_) {
-        return nullptr;
-    } else if (!root->left) {
-        return &root->data;
-    }
-
-    return minHelper(root->left);
+    return root->left ? minHelper(root->left) : &root->data;
 }
 
 template <typename T>
