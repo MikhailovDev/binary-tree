@@ -272,26 +272,31 @@ std::size_t BTree<T>::maxDepthHelper(const Node<T>* root, int& maxDepth,
 }
 
 template <typename T>
-inline std::size_t BTree<T>::getMinDepth() const {
+inline int BTree<T>::getMinDepth() const {
     int min = getFirstDepth(root_);
     return minDepthHelper(root_, min);
 }
 
 template <typename T>
-std::size_t BTree<T>::minDepthHelper(const Node<T>* root, int& minDepth,
+int BTree<T>::minDepthHelper(const Node<T>* root, int& minDepth,
                                      int depth) const {
     if (!root) {
-        return (minDepth = minDepth > depth - 1 ? depth - 1 : minDepth);
+        return minDepth;
     }
 
     minDepthHelper(root->left, minDepth, depth + 1);
     minDepthHelper(root->right, minDepth, depth + 1);
+	if (isLeaf(root)) {
+		return (minDepth = minDepth > depth + 1 ? depth + 1 : minDepth);
+	} else {
+		return minDepth;
+	}
 }
 
 template <typename T>
-std::size_t BTree<T>::getFirstDepth(const Node<T>* root, int depth) const {
+int BTree<T>::getFirstDepth(const Node<T>* root, int depth) const {
     if (!root) {
-        return depth - 1;
+        return depth;
     }
 
     return getFirstDepth(root->left, depth + 1);
@@ -349,6 +354,11 @@ bool BTree<T>::isBalancedHelper(const Node<T>* root) const {
     }
 
     return false;
+}
+
+template <typename T>
+inline bool BTree<T>::isLeaf(const Node<T>* root) const {
+    return !(root->left || root->right);
 }
 
 template <typename T>
