@@ -32,12 +32,12 @@ TEST_F(BTreeTest, PrintPreorderSixItemTree) {
     testing::internal::CaptureStdout();
     balancedTree.printPreorder();
     std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "1 0 -2 2 2 5 \n");
+    EXPECT_EQ(output, "1 0 -2 2 5 \n");
 
     balancedTree.insert(3);
 
     testing::internal::CaptureStdout();
     balancedTree.printPreorder();
     output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "1 0 -2 2 2 5 3 \n");
+    EXPECT_EQ(output, "1 0 -2 2 5 3 \n");
 }

@@ -27,13 +27,13 @@ TEST_F(BTreeTest, RemoveLeaf) {
 
 TEST_F(BTreeTest, RemoveItemWithOneChild) {
     tree1.remove(5);
-    EXPECT_EQ(tree1.getSize(), 9);
+    EXPECT_EQ(tree1.getSize(), 8);
     EXPECT_EQ(tree1.lookUp(5), nullptr);
     EXPECT_EQ(*tree1.lookUp(6), 6);
     EXPECT_EQ(*tree1.lookUp(7), 7);
 
     tree1.remove(0);
-    EXPECT_EQ(tree1.getSize(), 8);
+    EXPECT_EQ(tree1.getSize(), 7);
     EXPECT_EQ(tree1.lookUp(0), nullptr);
     EXPECT_EQ(*tree1.lookUp(-2), -2);
     EXPECT_EQ(*tree1.lookUp(-1), -1);
@@ -41,11 +41,8 @@ TEST_F(BTreeTest, RemoveItemWithOneChild) {
 
 TEST_F(BTreeTest, RemoveItemWithTwoChilds) {
     tree1.remove(2);
-    EXPECT_EQ(tree1.getSize(), 9);
-    EXPECT_EQ(*tree1.lookUp(5), 5);
-    EXPECT_EQ(*tree1.lookUp(2), 2);
-    tree1.remove(2);
     EXPECT_EQ(tree1.lookUp(2), nullptr);
+    EXPECT_EQ(*tree1.lookUp(5), 5);
     EXPECT_EQ(tree1.getSize(), 8);
 
     tree1.remove(3);

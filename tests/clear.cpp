@@ -14,7 +14,7 @@ TEST_F(BTreeTest, ClearOneItem) {
 }
 
 TEST_F(BTreeTest, ClearNormalTree) {
-	EXPECT_EQ(balancedTree.getSize(), 6);
+	EXPECT_EQ(balancedTree.getSize(), 5);
 	balancedTree.clear();
 	EXPECT_EQ(balancedTree.getSize(), 0);
 	EXPECT_EQ(balancedTree.lookUp(1), nullptr);

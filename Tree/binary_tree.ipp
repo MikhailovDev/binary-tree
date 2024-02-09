@@ -67,7 +67,7 @@ void BTree<T>::insert(const T& data) {
 
 template <typename T>
 void BTree<T>::insertHelper(const T& data, Node<T>* root) {
-    if (data <= root->data) {
+    if (data < root->data) {
         if (!root->left) {
             addNode(data, root->left);
             return;
@@ -75,14 +75,16 @@ void BTree<T>::insertHelper(const T& data, Node<T>* root) {
 
         insertHelper(data, root->left);
         return;
-    } else {
+    } else if (data > root->data){
         if (!root->right) {
             addNode(data, root->right);
             return;
         }
 
         insertHelper(data, root->right);
-    }
+    } else if (data == root->data) {
+		return;
+	}
 }
 
 template <typename T>

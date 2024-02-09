@@ -15,8 +15,8 @@ class BTreeTest : public testing::Test {
 	BTree<int> empty;
 	BTree<int> oneItem{1};
 	BTree<int> threeItems{1, 0, 2};
-	BTree<int> tree1{1, 0, 2, -2, 2, 5, 6, 7, 3, -1}; // size: 10
-	BTree<int> balancedTree {1, 0, 2, -2, 2, 5};
+	BTree<int> tree1{1, 0, 2, -2, 5, 6, 7, 3, -1}; // size: 9
+	BTree<int> balancedTree {1, 0, 2, -2, 5};
 };
 
 #endif // BTREE_FIXTURE_H

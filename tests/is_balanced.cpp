@@ -15,8 +15,8 @@ TEST_F(BTreeTest, IsBalancedNormalCases) {
 
 	balancedTree.remove(-3);
 	EXPECT_EQ(balancedTree.isBalanced(), true);
-	balancedTree.insert(2);
-	balancedTree.insert(2);
+	balancedTree.insert(9);
+	balancedTree.insert(10);
 	EXPECT_EQ(balancedTree.isBalanced(), false);
 
 	balancedTree.clear();
